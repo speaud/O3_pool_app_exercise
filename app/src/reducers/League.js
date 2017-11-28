@@ -9,7 +9,7 @@ const initialState = {
       id: 0,
       name: "player name0",
       games: {
-        total: 5,
+        total: 8,
         won: 4
       }
     },
@@ -18,6 +18,14 @@ const initialState = {
       name: "player name1",
       games: {
         total: 5,
+        won: 2
+      }
+    },
+    {
+      id: 2,
+      name: "player name2",
+      games: {
+        total: 3,
         won: 2
       }
     }

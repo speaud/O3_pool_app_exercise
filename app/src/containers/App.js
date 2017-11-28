@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { PageHeader, Grid, Row, Col } from 'react-bootstrap'
+import { ButtonToolbar, Button } from 'react-bootstrap'
 import Leaderboard from '../components/Leaderboard'
 
 class App extends Component {
@@ -9,6 +9,12 @@ class App extends Component {
     super(props);
 
     const {dispatch} = props;
+
+    this.createNewPlayer = this.createNewPlayer.bind(this);
+  }
+
+  createNewPlayer(e) {
+  	console.log("createNewPlayer")
   }
 
   render(){
@@ -18,10 +24,27 @@ class App extends Component {
 		return Math.round(b.games.won / b.games.total * 100) - Math.round(a.games.won / a.games.total * 100)
 	});
 
-
     return (
       <div>
+
+
+		  <ButtonToolbar>
+		    <Button onClick={this.createNewPlayer}>Creat New Player</Button>
+		  </ButtonToolbar>
+
+
+
+
+
+
 		<Leaderboard players={League.players} />
+
+
+
+
+
+
+
       </div>
     )
   }

@@ -26,8 +26,8 @@ const Leaderboard = ({players}) => (
   </div>
 )
 
-//Results.propTypes = {
-//  players: PropTypes.array.isRequired
-//}
+Leaderboard.propTypes = {
+  players: PropTypes.array.isRequired
+}
 
 export default Leaderboard
