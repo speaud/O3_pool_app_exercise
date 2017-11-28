@@ -27,24 +27,38 @@ At first I was going to haul-off to find some canvas-based pool game example I c
 
 But the notion of KISS/Rule of least power quickly kicked in…shortly followed by “Atwood’s Law,” and so-forth.
 
-That line of thought when coupled with the notion you all, or whomever, would most likely have to clone then run this locally...
+That line of thought when coupled with the notion that you all, or whomever, would have to clone then run this locally...
 
-Basically I didn’t want box configuration issues to arise (e.g., MongoDB data path, missing global dependencies, incompatible unix-like flavors, etc.) when whomever was trying to run this...
+Basically I didn’t want box configuration or dependency issues to arise (e.g., MongoDB data path, missing global dependencies, incompatible unix-like flavors, etc.) when whomever was trying to run this...
 
-If we were really building this out going following Atwood thus using a full JS stack...
+Also denoted within the provided instructions "...code for it on github."
+
+If we were building this out for a MVP/production release while following Atwood, thus using a full JS stack, we would've used...
 
 * MongoDB
-* Express
+* Express (Handle API requests)
 * React + Redux 
 * Node
+* ...and various NPM packages of course
 
 ...but we can talk more about that whenever.
 
-> NOTE: I'm running Ubuntu 16.04
+> NOTE: If it matters, my box is a Linux dist but everyone should be fine with the existing config
 
+### Overview
+
+In this repo we're using a React + Redux bundle alongside Webpack.
+
+###### Directory Structure
+
+...
+
+###### Noteworthy Features and NPM Considerations
+
+...
 
 ### Getting Started
 
-```cd app && npm i && sudo npm run start```
+Within the root of this repo run the following command ```cd app && npm i && sudo npm run start```
 
 > NOTE: `sudo` is not required for Windows OS
