@@ -23,17 +23,17 @@ Please deliver a link to the app and the code for it on github.
 
 ### Preamble
 
-At first I was going to haul-off to find some canvas-based pool game example I could rip then re-purpose it to work with some database then build out a few API’s then…you get the point.
+At first I was going to haul-off to find some canvas-based pool game example I could rip then re-purpose to work with some database then build out a few API’s then…you get the point.
 
 But the notion of KISS/Rule of least power quickly kicked in…shortly followed by “Atwood’s Law,” and so-forth.
 
 That line of thought when coupled with the notion that you all, or whomever, would have to clone then run this locally...
 
-Basically I didn’t want box configuration or dependency issues to arise (e.g., MongoDB data path, missing global dependencies, incompatible unix-like flavors, etc.) when whomever was trying to run this...
+Basically I didn’t want box configuration, IDE exports, or dependency issues to arise (e.g., MongoDB data path, missing global dependencies, incompatible unix-like flavors, etc.) when whomever was trying to run this...
 
-Also denoted within the provided instructions "...code for it on github."
+We could've used some sandbox/playground service to host this (e.g., Plnkr, CodePen, Fiddle, JSBin, etc.) but as denoted within the provided instructions you all wanted "...code for it on github." Works for me...
 
-If we were building this out for a MVP/production release while following Atwood, thus using a full JS stack, we would've used...
+Aside, if we were building this out for a MVP/production release while following Atwood, thus using a full JS stack, we would've used some stack like...
 
 * MongoDB
 * Express (Handle API requests)
@@ -41,13 +41,11 @@ If we were building this out for a MVP/production release while following Atwood
 * Node
 * ...and various NPM packages of course
 
-...but we can talk more about that whenever.
-
-> NOTE: If it matters, my box is a Linux dist but everyone should be fine with the existing config
+...but we can talk more about that or other approaches later on.
 
 ### Overview
 
-In this repo we're using a React + Redux bundle alongside Webpack.
+In this repo we're using a React + Redux bundle alongside Webpack which we leverage for our local dev server, HMR, release bundling, etc.
 
 ###### Directory Structure
 
@@ -55,7 +53,7 @@ In this repo we're using a React + Redux bundle alongside Webpack.
 
 ###### Noteworthy Features and NPM Considerations
 
-...
+Babel, SaSS, persistedState method, ...
 
 ### Getting Started
 
