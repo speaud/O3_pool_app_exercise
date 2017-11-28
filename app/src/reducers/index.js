@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import League from './League.js'
+import League from './League'
+import GamePlay from './GamePlay'
 
 const rootReducer = combineReducers({
-  League
+  League,
+  GamePlay
 })
 
 export default rootReducer

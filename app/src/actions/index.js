@@ -1,98 +1,85 @@
 import {
-    REQUEST_QUERY_SOURCE,
-    RECEIVE_QUERY_SOURCE,
-    
-    REQUEST_QUERY_LIMIT,
-    RECEIVE_QUERY_LIMIT,
+    REQUEST_PLAYER_SETUP,
+    RECEIVE_PLAYER_SETUP,
+    REQUEST_GAME_NEW,
+    RECEIVE_GAME_NEW,
+    RECEIVE_GAME_PLAYER,
 
-    REQUEST_QUERY_SEARCH,
-    RECEIVE_QUERY_SEARCH,
 
-    REQUEST_QUERY_RESULTS,
-    RECEIVE_QUERY_RESULTS,
-
-    REQUEST_QUERY_RESET,
-    RECEIVE_QUERY_RESET
+    REQUEST_GAMEPLAY_RESET,
+    RECEIVE_GAMEPLAY_RESET    
 } from '../constants'
 
-export const queryAction = (arg) => dispatch => {
+// Used to generate unique id for new players
+const uuidv1 = require('uuid/v1')
+
+export const leagueAction = (bool, arg) => dispatch => {
     dispatch({
-        type: REQUEST_QUERY_SOURCE
+        type: REQUEST_PLAYER_SETUP,
+        payload: bool
     });
 
-    dispatch({
-        type: RECEIVE_QUERY_SOURCE,
-        payload: arg
-    });
-};
+    if (arg) {
+        dispatch({
+            type: RECEIVE_PLAYER_SETUP,
+            payload: {
+                id: uuidv1(),
+                name: arg,
+                games: {
+                    total: 0,
+                    won: 0
+                }
+            }
+        });
+    }    
+}
 
+export const gamePlayAction = (bool, arg) => dispatch => {
+    console.log("gamePlayAction")
+    console.log("bool = " + bool)
 
-export const resetQuery = (arg) => dispatch => {
-    dispatch({
-        type: REQUEST_QUERY_RESET
-    });
+    if (bool == 'null') {
+        dispatch({
+            type: REQUEST_GAMEPLAY_RESET
+        });
 
-    dispatch({
-        type: RECEIVE_QUERY_RESET
-    });
-};
-
-export const limitQuery = (arg) => dispatch => {
-    console.log("limitQuery")
-
-    dispatch({
-        type: REQUEST_QUERY_LIMIT
-    });
-
-    dispatch({
-        type: RECEIVE_QUERY_LIMIT,
-        payload: arg
-    });    
-};
-
-export const searchQuery = (arg) => dispatch => {
-    console.log("searchQuery")
-
-    dispatch({
-        type: REQUEST_QUERY_SEARCH
-    });
-
-    dispatch({
-        type: RECEIVE_QUERY_SEARCH,
-        payload: arg
-    });
-
-    if (arg.length > 3) {
-
-        dispatch(runQuery(arg))
-
+        dispatch({
+            type: RECEIVE_GAMEPLAY_RESET
+        });
     } else {
         dispatch({
-            type: RECEIVE_QUERY_RESULTS,
-            payload: []
-        });        
+            type: REQUEST_GAME_NEW,
+            payload: bool
+        });
     }
-};
 
-export const runQuery = (arg) => dispatch => {
-    console.log("runQuery arg = ", arg)
-    dispatch({
-        type: REQUEST_QUERY_RESULTS
-    });
 
-    return fetch(`https://www.reddit.com/r/${arg}.json`)
-        .then(response => response.json())
-        .then(json => {
-            //console.dir(json)
+    if (arg) {
+        dispatch({
+            type: RECEIVE_GAME_PLAYER,
+            payload: arg
+        });
+    }
+}
 
-            dispatch(recieveQueryResults(json))
-        })
-            
-};
 
-export const recieveQueryResults = (json) => dispatch => {
-    dispatch({
-        type: RECEIVE_QUERY_RESULTS,
-        payload: json.data.children.map(child => child.data)
-    });
-};
+
+
+
+// 
+
+
+
+
+
+
+
+
+
+
+//export const recieveQueryResults = (json) => dispatch => {
+//    dispatch({
+//        type: RECEIVE_QUERY_RESULTS,
+//        payload: json.data.children.map(child => child.data)
+//    });
+//};
