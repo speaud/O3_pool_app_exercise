@@ -29,7 +29,7 @@ But the notion of KISS/Rule of least power quickly kicked in…shortly followed 
 
 That line of thought when coupled with the notion you all, or whomever, would most likely have to clone then run this locally...
 
-Basically I didn’t want box configuration issues to arise (e.g., MongoDB data path, missing global dependencies, incompatible unix-like flavors, etc.) when whomever was trying to run this nor did I want to slap this on a live server. Aside, an alternate would’ve been using one of those sandboxes out there like CodePen or JSFiddle but ultimately I decided to set up this repo.
+Basically I didn’t want box configuration issues to arise (e.g., MongoDB data path, missing global dependencies, incompatible unix-like flavors, etc.) when whomever was trying to run this...
 
 If we were really building this out going following Atwood thus using a full JS stack...
 
@@ -40,4 +40,11 @@ If we were really building this out going following Atwood thus using a full JS 
 
 ...but we can talk more about that whenever.
 
+__NOTE: I'm running Ubuntu 16.04__
+
+
 ### Getting Started
+
+```cd app && sudo npm run start```
+
+__NOTE: `sudo` is not required for Windows OS__
