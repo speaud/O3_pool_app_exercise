@@ -17,7 +17,7 @@ const Leaderboard = ({players}) => (
           <tr key={i}>
             <td>{i}</td>
             <td>{player.name}</td>
-            <td>{player.games.won / player.games.total}</td>
+            <td>{Math.round(player.games.won / player.games.total * 100)}%</td>
           </tr>
         )}    
       </tbody>
