@@ -1,15 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Table } from 'react-bootstrap'
 
 const Leaderboard = ({players}) => (
   <div>
-    <ul>
-      {players.map((player, i) =>
-        <li key={i}>
-          <p><small>player {i}</small></p>
-        </li>
-      )}
-    </ul>
+    <Table striped bordered condensed hover>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Win Pct.</th>
+        </tr>
+      </thead>
+      <tbody>
+        {players.map((player, i) =>
+          <tr key={i}>
+            <td>{i}</td>
+            <td>{player.name}</td>
+            <td>{player.games.won / player.games.total}</td>
+          </tr>
+        )}    
+      </tbody>
+    </Table>
   </div>
 )
 

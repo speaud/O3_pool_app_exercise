@@ -47,7 +47,11 @@ class App extends Component {
 
     return (
       <div>
-      	<Leaderboard players={League.players} />
+      	{/*
+asdasd
+      	*/}
+		<Leaderboard players={League.players} />
+
       </div>
     )
   }
