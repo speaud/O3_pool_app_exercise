@@ -4,7 +4,8 @@ import { Table } from 'react-bootstrap'
 
 const Leaderboard = ({players}) => (
   <div>
-    <Table striped bordered condensed hover>
+    <p>Leaderboard</p>
+    <Table responsive striped bordered condensed hover>
       <thead>
         <tr>
           <th>Rank</th>
@@ -15,9 +16,9 @@ const Leaderboard = ({players}) => (
       <tbody>
         {players.map((player, i) =>
           <tr key={i}>
-            <td>{i}</td>
-            <td>{player.name}</td>
-            <td>{Math.round(player.games.won / player.games.total * 100)}%</td>
+            <td>{ i + 1 }</td>
+            <td>{ player.name }</td>
+            <td>{ Math.round(player.games.won / player.games.total * 100) }%</td>
           </tr>
         )}    
       </tbody>

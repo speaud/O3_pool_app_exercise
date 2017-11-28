@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
+import { PageHeader, Grid, Row, Col } from 'react-bootstrap'
 import Leaderboard from '../components/Leaderboard'
 
 class App extends Component {
@@ -14,44 +14,14 @@ class App extends Component {
   render(){
   	const { League } = this.props
 
-  	//League.players
+	League.players.sort((a, b) => {
+		return Math.round(b.games.won / b.games.total * 100) - Math.round(a.games.won / a.games.total * 100)
+	});
 
-
-	//var new_array = arr.map(function callback(currentValue, index, array) {
-	//    // Return element for new_array
-	//}[, thisArg])  	
-
-  	//const a = ['a', 'b', 'c']
-
-  	// i = value, z = key || index
-  	//a.map((i, z) => {
-  	//	console.log(i + z)
-  	//})
-
-  	//const b = { b1: {b11: "b111"}, b2: {b22: "b222"} }
-
-//  	for (const bn in b) {
-//  		//console.log(bn)
-//  		console.log(b[bn])
-//  	}
-//
-//  	console.log(Object.entries(b)); // [ ['foo', 'bar'], ['baz', 42] ]
-
-
-	//const mapp = new Map(Object.entries(b));
-	//console.log(mapp);
-
-	//for (const m in mapp) {
-	//	console.log(m)
-	//}
 
     return (
       <div>
-      	{/*
-asdasd
-      	*/}
 		<Leaderboard players={League.players} />
-
       </div>
     )
   }

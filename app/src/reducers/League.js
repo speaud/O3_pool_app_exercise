@@ -7,38 +7,24 @@ const initialState = {
   players: [
     {
       id: 0,
-      name: "name0",
+      name: "player name0",
       games: {
-        total: 3,
-        won: 0
+        total: 5,
+        won: 4
       }
     },
     {
       id: 1,
-      name: "name1",
+      name: "player name1",
       games: {
-        total: 3,
-        won: 1
-      }
-    },
-    {
-      id: 2,
-      name: "name2",
-      games: {
-        total: 3,
+        total: 5,
         won: 2
       }
     }
-  ]
+  ],
+  playing: [],
+  meta: null
 }
-
-
-//const initialState = {
-//  players: ['player0', 'player1', 'player2'],
-//  playing: [],
-//  meta: null
-//}
-
 
 const League = (state = initialState, action) => {
   switch (action.type) {
