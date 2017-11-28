@@ -40,11 +40,11 @@ If we were really building this out going following Atwood thus using a full JS 
 
 ...but we can talk more about that whenever.
 
-__NOTE: I'm running Ubuntu 16.04__
+> NOTE: I'm running Ubuntu 16.04
 
 
 ### Getting Started
 
-```cd app && sudo npm run start```
+```cd app && npm i && sudo npm run start```
 
-__NOTE: `sudo` is not required for Windows OS__
+> NOTE: `sudo` is not required for Windows OS
