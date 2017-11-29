@@ -17,7 +17,10 @@ import {
     RECEIVE_GAMEPLAY_ACTIVE_STATUS,
 
     REQUEST_GAMEPLAY_OPPONENT,
-    RECEIVE_GAMEPLAY_OPPONENT    
+    RECEIVE_GAMEPLAY_OPPONENT,
+
+    REQUEST_LEADERBOARD_UPDATE,
+    RECEIVE_LEADERBOARD_UPDATE    
 } from '../constants'
 
 // Used to generate unique id for new players
@@ -46,6 +49,12 @@ export const leagueAction = (bool, arg) => dispatch => {
 
 export const gameplayAction = (bool, boolOrObj, id) => (dispatch, getState) => {
     console.log("gameplayAction")
+    // Start game play - Gameplay.active && Gameplay.opponents = []
+    // Clear opponents - Gameplay.active && Gameplay.opponents = []
+    // End game play - !Gameplay.active && Gameplay.opponents = []
+    dispatch({
+        type: REQUEST_GAMEPLAY_ACTIVE_STATUS
+    });
 
     if (id) {
         let
@@ -60,32 +69,17 @@ export const gameplayAction = (bool, boolOrObj, id) => (dispatch, getState) => {
             }
         });
 
-        console.log(uniqBy([...opponents, ...players], 'id'))    
+        dispatch({
+            type: REQUEST_LEADERBOARD_UPDATE
+        });
+
+        dispatch({
+            type: RECEIVE_LEADERBOARD_UPDATE,
+            payload: {
+                players: uniqBy([...opponents, ...players], 'id')
+            }
+        });        
     }
-
-
-
-
-
-
-
-
-
-
-    // Start game play - Gameplay.active && Gameplay.opponents = []
-    // Clear opponents - Gameplay.active && Gameplay.opponents = []
-    // End game play - !Gameplay.active && Gameplay.opponents = []
-    dispatch({
-        type: REQUEST_GAMEPLAY_ACTIVE_STATUS
-    });
-
-    dispatch({
-        type: RECEIVE_GAMEPLAY_ACTIVE_STATUS,
-        payload: {
-            active: bool,
-            opponents: (typeof boolOrObj === 'boolean') ? boolOrObj : true
-        }
-    });
 
     // Select opponent - Gameplay.active && Gameplay.opponents = [...]
     if (typeof boolOrObj === 'object') {
@@ -99,6 +93,13 @@ export const gameplayAction = (bool, boolOrObj, id) => (dispatch, getState) => {
         });
     }
 
+    dispatch({
+        type: RECEIVE_GAMEPLAY_ACTIVE_STATUS,
+        payload: {
+            active: bool,
+            opponents: (typeof boolOrObj === 'boolean') ? boolOrObj : true
+        }
+    });
 }
 
 

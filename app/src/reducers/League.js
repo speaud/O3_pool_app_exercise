@@ -3,7 +3,10 @@ import {
   FSA_META_RECEIVE,
 
   REQUEST_PLAYER_SETUP,
-  RECEIVE_PLAYER_SETUP  
+  RECEIVE_PLAYER_SETUP,
+
+  REQUEST_LEADERBOARD_UPDATE,
+  RECEIVE_LEADERBOARD_UPDATE  
 } from '../constants/index.js'
 
 const initialState = {
@@ -61,6 +64,21 @@ const League = (state = initialState, action) => {
         players: [...state.players, action.payload],
         meta: FSA_META_RECEIVE
       }
+
+
+    case REQUEST_LEADERBOARD_UPDATE:
+      return {
+        ...state,
+        meta: FSA_META_REQUEST
+      }
+
+
+    case RECEIVE_LEADERBOARD_UPDATE:
+      return {
+        ...state,
+        players: action.payload.players,
+        meta: FSA_META_RECEIVE        
+      }      
 
     default:
       return state
