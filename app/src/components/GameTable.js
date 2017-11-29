@@ -4,11 +4,32 @@ import { ButtonToolbar, Button } from 'react-bootstrap'
 
 const GameTable = ({opponents, onGameplayEvent}) => (
   <div>
-    <p>GameTable</p>
+    <div id="poolTable">
+      <div className="pocket-container">
+        {/* ... */}
+      </div>
+
+
+
+
+
+      <div className="player-container">
+        {opponents.map((opponent, i) =>
+          <div key={i} className="player">
+            {opponent.name}
+          </div>
+        )}
+      </div>
+
+
+
+
+
+      <div className="pocket-container">
+        {/* ... */}
+      </div>  
+    </div>
 	  <ButtonToolbar>
-      {opponents.map((opponent, i) =>
-			    <Button value={opponent}>{opponent.name}</Button>
-      )}
       {opponents.length === 2 &&
       	<Button bsStyle="primary" onClick={(e) => onGameplayEvent(e, true, true, opponents[Math.round(Math.random())].id)}>Random Winner</Button>
       }

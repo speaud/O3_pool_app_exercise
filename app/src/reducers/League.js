@@ -65,13 +65,11 @@ const League = (state = initialState, action) => {
         meta: FSA_META_RECEIVE
       }
 
-
     case REQUEST_LEADERBOARD_UPDATE:
       return {
         ...state,
         meta: FSA_META_REQUEST
       }
-
 
     case RECEIVE_LEADERBOARD_UPDATE:
       return {

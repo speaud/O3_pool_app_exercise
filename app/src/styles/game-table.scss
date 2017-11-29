@@ -1,0 +1,17 @@
+#poolTable {
+	border: 20px solid #A05A2C;
+	min-height: 200px;
+	border-radius: 20px;
+	background: #2DA930;
+	color: #fff;
+
+	.player-container {
+		display: flex;
+
+		.player {
+			flex: 1;
+			text-align: center;
+			background: #00ff00;
+		}
+	}
+}

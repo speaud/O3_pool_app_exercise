@@ -4,7 +4,7 @@ import { Table, ButtonToolbar, Button } from 'react-bootstrap'
 
 const Leaderboard = ({players, selecting, select, selected, noselect}) => (
   <div>
-    <p>Leaderboard{selecting ? "yes" : "no"} -- {noselect ? "yes" : "no"} - {selected}</p>
+    <p>Leaderboard</p>
     <Table responsive striped bordered condensed hover>
       <thead>
         <tr>
@@ -17,6 +17,7 @@ const Leaderboard = ({players, selecting, select, selected, noselect}) => (
         </tr>
       </thead>
       <tbody>
+
         {players.map((player, i) =>
           <tr key={i}>
             {/* new players shouldn't be ranked, since they haven't played yet */}
@@ -53,6 +54,7 @@ const Leaderboard = ({players, selecting, select, selected, noselect}) => (
 
           </tr>
         )}
+        
       </tbody>
     </Table>
   </div>
