@@ -3,27 +3,18 @@ import { uniqBy } from 'lodash'
 import {
     REQUEST_PLAYER_SETUP,
     RECEIVE_PLAYER_SETUP,
-    REQUEST_GAME_NEW,
-    RECEIVE_GAME_NEW,
-    RECEIVE_GAME_PLAYER,
 
-
-    REQUEST_GAMEPLAY_RESET,
-    RECEIVE_GAMEPLAY_RESET,
-
-
+    REQUEST_LEADERBOARD_UPDATE,
+    RECEIVE_LEADERBOARD_UPDATE,
 
     REQUEST_GAMEPLAY_ACTIVE_STATUS,
     RECEIVE_GAMEPLAY_ACTIVE_STATUS,
 
     REQUEST_GAMEPLAY_OPPONENT,
     RECEIVE_GAMEPLAY_OPPONENT,
-
-    REQUEST_LEADERBOARD_UPDATE,
-    RECEIVE_LEADERBOARD_UPDATE    
 } from '../constants'
 
-// Used to generate unique id for new players
+// Used to generate unique id value for new players
 const uuidv1 = require('uuid/v1')
 
 export const leagueAction = (bool, arg) => dispatch => {
@@ -101,15 +92,3 @@ export const gameplayAction = (bool, boolOrObj, id) => (dispatch, getState) => {
         }
     });
 }
-
-
-
-
-
-
-//export const recieveQueryResults = (json) => dispatch => {
-//    dispatch({
-//        type: RECEIVE_QUERY_RESULTS,
-//        payload: json.data.children.map(child => child.data)
-//    });
-//};
