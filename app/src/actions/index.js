@@ -1,3 +1,5 @@
+import { uniqBy } from 'lodash'
+
 import {
     REQUEST_PLAYER_SETUP,
     RECEIVE_PLAYER_SETUP,
@@ -7,7 +9,15 @@ import {
 
 
     REQUEST_GAMEPLAY_RESET,
-    RECEIVE_GAMEPLAY_RESET    
+    RECEIVE_GAMEPLAY_RESET,
+
+
+
+    REQUEST_GAMEPLAY_ACTIVE_STATUS,
+    RECEIVE_GAMEPLAY_ACTIVE_STATUS,
+
+    REQUEST_GAMEPLAY_OPPONENT,
+    RECEIVE_GAMEPLAY_OPPONENT    
 } from '../constants'
 
 // Used to generate unique id for new players
@@ -34,43 +44,62 @@ export const leagueAction = (bool, arg) => dispatch => {
     }    
 }
 
-export const gamePlayAction = (bool, arg) => dispatch => {
-    console.log("gamePlayAction")
-    console.log("bool = " + bool)
+export const gameplayAction = (bool, boolOrObj, id) => (dispatch, getState) => {
+    console.log("gameplayAction")
 
-    if (bool == 'null') {
-        dispatch({
-            type: REQUEST_GAMEPLAY_RESET
+    if (id) {
+        let
+            players = getState().League.players,
+            opponents = getState().Gameplay.opponents;
+
+        opponents.forEach((opponent) => {
+            opponent.games.total++
+            
+            if (opponent.id === id) {
+                opponent.games.won++
+            }
         });
 
-        dispatch({
-            type: RECEIVE_GAMEPLAY_RESET
-        });
-    } else {
-        dispatch({
-            type: REQUEST_GAME_NEW,
-            payload: bool
-        });
+        console.log(uniqBy([...opponents, ...players], 'id'))    
     }
 
 
-    if (arg) {
+
+
+
+
+
+
+
+
+    // Start game play - Gameplay.active && Gameplay.opponents = []
+    // Clear opponents - Gameplay.active && Gameplay.opponents = []
+    // End game play - !Gameplay.active && Gameplay.opponents = []
+    dispatch({
+        type: REQUEST_GAMEPLAY_ACTIVE_STATUS
+    });
+
+    dispatch({
+        type: RECEIVE_GAMEPLAY_ACTIVE_STATUS,
+        payload: {
+            active: bool,
+            opponents: (typeof boolOrObj === 'boolean') ? boolOrObj : true
+        }
+    });
+
+    // Select opponent - Gameplay.active && Gameplay.opponents = [...]
+    if (typeof boolOrObj === 'object') {
         dispatch({
-            type: RECEIVE_GAME_PLAYER,
-            payload: arg
+            type: REQUEST_GAMEPLAY_OPPONENT
+        });
+
+        dispatch({
+            type: RECEIVE_GAMEPLAY_OPPONENT,
+            payload: boolOrObj
         });
     }
+
 }
-
-
-
-
-
-// 
-
-
-
-
 
 
 

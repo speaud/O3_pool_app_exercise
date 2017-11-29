@@ -6,7 +6,7 @@ import { ButtonToolbar, Button, Form, FormGroup, ControlLabel, FormControl, Help
 import Leaderboard from '../components/Leaderboard'
 import GameTable from '../components/GameTable'
 
-import { leagueAction, gamePlayAction } from '../actions/'
+import { leagueAction, gameplayAction } from '../actions/'
 
 class App extends Component {
 	constructor(props){
@@ -29,7 +29,7 @@ class App extends Component {
 
 
 		this.onLeagueEvent = this.onLeagueEvent.bind(this);
-		this.onGamePlayEvent = this.onGamePlayEvent.bind(this);
+		this.onGameplayEvent = this.onGameplayEvent.bind(this);
 	}
 
 
@@ -48,20 +48,21 @@ class App extends Component {
 		}
 	}
 
-	onGamePlayEvent(e, bool, objOrBool){
+	onGameplayEvent(e, bool, objOrBool, id){
 		// Setup new game
 		// Select opponents
 		// Cancel game
 		// Play game, or rematch
 		// End game
-		this.props.gamePlayAction(bool, objOrBool)
+		this.props.gameplayAction(bool, objOrBool, id)
 	}
 
 
 	selectPlayer(e){
-		console.dir(JSON.parse(e.target.value))
+		//console.dir(JSON.parse(e.target.value))
+		console.log("selectPlayer")
 
-		this.props.gamePlayAction(null, JSON.parse(e.target.value))
+		this.props.gameplayAction(true, JSON.parse(e.target.value))
 		//console.dir(e.t)
 		//this.props.createNewGameAction(true, e.target.value)
 	}
@@ -92,7 +93,7 @@ class App extends Component {
 
 
   render(){
-  	const { League, GamePlay } = this.props
+  	const { League, Gameplay } = this.props
 
 		League.players.sort((a, b) => {
 			return Math.round(b.games.won / b.games.total * 100) - Math.round(a.games.won / a.games.total * 100)
@@ -102,12 +103,13 @@ class App extends Component {
       <div>
 				<Leaderboard
 					players={League.players}
-					selecting={GamePlay.active}
+					selecting={Gameplay.active}
 					select={this.selectPlayer}
-					noselect={(GamePlay.opponents.length >= 2) ? true : false}
+					noselect={(Gameplay.opponents.length >= 2) ? true : false}
+					selected={(Gameplay.opponents.length > 0) ? Gameplay.opponents[0].id : null}
 				/>
 
-				{League.creating || GamePlay.active ? (
+				{League.creating || Gameplay.active ? (
 					<div>
 						<ButtonToolbar>
 							<Button disabled>Setup New Player</Button>
@@ -139,14 +141,14 @@ class App extends Component {
 				) : (
 					<ButtonToolbar>
 						<Button onClick={(e) => this.onLeagueEvent(e, true)}>Setup New Player</Button>
-			    	<Button onClick={(e) => this.onGamePlayEvent(e, true)}>Play New Game</Button>
+			    	<Button onClick={(e) => this.onGameplayEvent(e, true)}>Play New Game</Button>
 					</ButtonToolbar>
 				)}
 
-				{GamePlay.active &&
+				{Gameplay.active &&
 					<GameTable
-						opponents={GamePlay.opponents}
-						cancel={this.onGamePlayEvent}
+						opponents={Gameplay.opponents}
+						onGameplayEvent={this.onGameplayEvent}
 					/>
 				}
       </div>
@@ -157,14 +159,14 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     League: state.League,
-    GamePlay: state.GamePlay
+    Gameplay: state.Gameplay
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
 		leagueAction,
-		gamePlayAction
+		gameplayAction
   },dispatch)
 }
 
