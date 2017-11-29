@@ -17,7 +17,6 @@ const initialState = {
 const GamePlay = (state = initialState, action) => {
   switch (action.type) {
 
-
     case REQUEST_GAMEPLAY_ACTIVE_STATUS:
     case REQUEST_GAMEPLAY_OPPONENT:
       return {

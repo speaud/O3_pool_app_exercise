@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, ButtonToolbar, Button } from 'react-bootstrap'
 
-const Leaderboard = ({players, selecting, select, noselect, selected}) => (
+const Leaderboard = ({players, selecting, select, selected, noselect}) => (
   <div>
     <p>Leaderboard{selecting ? "yes" : "no"} -- {noselect ? "yes" : "no"} - {selected}</p>
     <Table responsive striped bordered condensed hover>
@@ -50,17 +50,21 @@ const Leaderboard = ({players, selecting, select, noselect, selected}) => (
                 )}
               </td>
             }
-            
+
           </tr>
         )}
-        {/* if adding new user,  */}
       </tbody>
     </Table>
   </div>
 )
 
 Leaderboard.propTypes = {
-  players: PropTypes.array.isRequired
+  players: PropTypes.array.isRequired,    // League.players
+  selecting: PropTypes.bool.isRequired,   // Gameplay.active
+  select: PropTypes.func.isRequired,      // ...
+  selected: PropTypes.string.isRequired,  // Gameplay.opponents[0].id
+  noselect: PropTypes.bool.isRequired     // Gameplay.opponents.length >= 2
+
 }
 
 export default Leaderboard
