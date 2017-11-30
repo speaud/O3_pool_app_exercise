@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ButtonToolbar, Button, Form, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
+import { Grid, Row, Col, PageHeader, Panel, ButtonToolbar, Button, Form, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
 
 import Leaderboard from '../components/Leaderboard'
 import GameTable from '../components/GameTable'
@@ -34,6 +34,43 @@ class App extends Component {
 
 
 
+
+
+
+
+
+componentWillUpdate(nextProps, nextState) {
+	console.log("App - componentWillUpdate")
+}
+
+
+
+componentDidUpdate(prevProps, prevState) {
+	console.log("App - componentDidUpdate")
+	console.log(prevProps, prevState)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	onLeagueEvent(e, bool){
 		// Open the form to create new player
 		// Add new player to the league
@@ -54,6 +91,11 @@ class App extends Component {
 		// Cancel game
 		// Play game, or rematch
 		// End game
+
+		if (id) {
+
+		}
+
 		this.props.gameplayAction(bool, objOrBool, id)
 	}
 
@@ -100,50 +142,67 @@ class App extends Component {
 		});
 
     return (
-      <div>
-				<Leaderboard
-					players={League.players}
-					selecting={Gameplay.active}
-					select={this.selectPlayer}
-					noselect={(Gameplay.opponents.length >= 2) ? true : false}
-					selected={(Gameplay.opponents.length > 0) ? Gameplay.opponents[0].id : null}
-				/>
+			<Grid>
+      	<PageHeader>O3 Pool App Exercise <small>Joshua Mummert</small></PageHeader>
 
 				{League.creating || Gameplay.active ? (
-					<div>
-						<ButtonToolbar>
-							<Button disabled>Setup New Player</Button>
-				    	<Button disabled>Play New Game</Button>
-						</ButtonToolbar>
-						{League.creating &&
-							<Form inline>
-								<FormGroup
-							  		controlId="formBasicText"
-							  		validationState={this.getValidationState()}
-								>
-						  		<FormControl
-							    	type="text"
-							    	value={this.state.value}
-							    	placeholder="Enter text"
-							    	onChange={this.handleChange}
-							  	/>
-							  	<FormControl.Feedback />
-								</FormGroup>
-								<Button type="submit" bsStyle="primary" value={this.state.value} onClick={(e) => this.onLeagueEvent(e, false)}>
-									Add New Player
-								</Button>
-								<Button bsStyle="warning" onClick={(e) => this.onLeagueEvent(e, false)}>
-									Cancel
-								</Button>
-							</Form>
-						}
-					</div>
+			    <Row className="show-grid">
+						<Col md={12}>
+							<ButtonToolbar>
+								<Button disabled>Setup New Player</Button>
+					    	<Button disabled>Play New Game</Button>
+							</ButtonToolbar>
+						</Col>
+			    </Row>
 				) : (
-					<ButtonToolbar>
-						<Button onClick={(e) => this.onLeagueEvent(e, true)}>Setup New Player</Button>
-			    	<Button onClick={(e) => this.onGameplayEvent(e, true)}>Play New Game</Button>
-					</ButtonToolbar>
+			    <Row className="show-grid">
+						<Col md={12}>
+						<ButtonToolbar>
+							<Button onClick={(e) => this.onLeagueEvent(e, true)}>Setup New Player</Button>
+				    	<Button onClick={(e) => this.onGameplayEvent(e, true)}>Play New Game</Button>
+						</ButtonToolbar>
+						</Col>
+			    </Row>
 				)}
+
+		    <Row className="show-grid">
+					<Col md={12}>
+							<Leaderboard
+								players={League.players}
+								selecting={Gameplay.active}
+								select={this.selectPlayer}
+								noselect={(Gameplay.opponents.length >= 2) ? true : false}
+								selected={(Gameplay.opponents.length > 0) ? Gameplay.opponents[0].id : null}
+							/>
+					</Col>
+		    </Row>
+
+				{League.creating &&
+			    <Row className="show-grid">
+						<Col md={12}>	
+								<Form inline>
+									<FormGroup
+								  		controlId="formBasicText"
+								  		validationState={this.getValidationState()}
+									>
+							  		<FormControl
+								    	type="text"
+								    	value={this.state.value}
+								    	placeholder="Enter text"
+								    	onChange={this.handleChange}
+								  	/>
+								  	<FormControl.Feedback />
+									</FormGroup>
+									<Button type="submit" bsStyle="primary" value={this.state.value} onClick={(e) => this.onLeagueEvent(e, false)}>
+										Add New Player
+									</Button>
+									<Button bsStyle="warning" onClick={(e) => this.onLeagueEvent(e, false)}>
+										Cancel
+									</Button>
+								</Form>
+						</Col>
+			    </Row>
+				}		    
 
 				{Gameplay.active &&
 					<GameTable
@@ -151,7 +210,7 @@ class App extends Component {
 						onGameplayEvent={this.onGameplayEvent}
 					/>
 				}
-      </div>
+		  </Grid>      
     )
   }
 }

@@ -32,7 +32,7 @@ const initialState = {
       id: 2,
       name: "player name2",
       games: {
-        total: 3,
+        total: 5,
         won: 2
       }
     },

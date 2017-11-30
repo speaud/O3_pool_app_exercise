@@ -1,17 +1,69 @@
+$pocket-size: 20px;
+$default-margin: 10px;
+$default-min-height: 200px;
+
 #poolTable {
 	border: 20px solid #A05A2C;
-	min-height: 200px;
+	min-height: $default-min-height;
 	border-radius: 20px;
 	background: #2DA930;
-	color: #fff;
+	color: #000;
+	position: relative;
 
-	.player-container {
+	.pocket-container:nth-child(1) {
+		margin-top: -$default-margin;
+	}
+
+	.pocket-container:nth-child(3) {
+	  top: 100%;
+	  transform: translateY(-100%);
+	  margin-top: $default-margin;
+	}
+
+	.pocket-container {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+		height: $pocket-size;
+
+		.pocket {
+			height: $pocket-size;
+			width: $pocket-size;
+			background: #000;
+			border-radius: 100%;
+			display: inline-block;
+		}
+
+		.pocket:first-child {
+			float: left;
+			margin-left: -$default-margin;
+		}
+
+		.pocket:last-child {
+			float: right;
+			margin-right: -$default-margin;
+		}
+	}
+
+	.player-wrapper {
 		display: flex;
+	  min-height: $default-min-height;
 
-		.player {
+		.player-container {
 			flex: 1;
 			text-align: center;
-			background: #00ff00;
+
+			.player {
+	  		position: relative;
+				background: #fff;
+				margin: 0 20px;
+				padding: 10px;
+			  top: 50%;
+			  transform: translateY(-50%);
+			  border: 1px solid #ccc;
+			  border-radius: 5px;
+			  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+			}
 		}
 	}
 }
