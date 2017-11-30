@@ -11,9 +11,16 @@ import {
 
 const initialState = {
   creating: false,
+  history: [],
+  /*
+    Again, within the specs for this exercise it clearly states you want a "Leaderboard of players with the most wins," so...
+    this is the state structure I decided to go with to meet said spec
+
+    players.games.total was added for new user logic --- see ../components/Leaderboard for more info
+  */
   players: [
     {
-      id: 0,
+      id: "0",
       name: "player name0",
       games: {
         total: 8,
@@ -21,7 +28,7 @@ const initialState = {
       }
     },
     {
-      id: 1,
+      id: "1",
       name: "player name1",
       games: {
         total: 5,
@@ -29,7 +36,7 @@ const initialState = {
       }
     },
     {
-      id: 2,
+      id: "2",
       name: "player name2",
       games: {
         total: 5,
@@ -37,7 +44,7 @@ const initialState = {
       }
     },
     {
-      id: 3,
+      id: "3",
       name: "player name3",
       games: {
         total: 0,
@@ -75,6 +82,7 @@ const League = (state = initialState, action) => {
       return {
         ...state,
         players: action.payload.players,
+        history: [...state.history, action.payload.history],
         meta: FSA_META_RECEIVE        
       }      
 

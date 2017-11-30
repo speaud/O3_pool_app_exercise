@@ -67,7 +67,8 @@ export const gameplayAction = (bool, boolOrObj, id) => (dispatch, getState) => {
         dispatch({
             type: RECEIVE_LEADERBOARD_UPDATE,
             payload: {
-                players: uniqBy([...opponents, ...players], 'id')
+                players: uniqBy([...opponents, ...players], 'id'),
+                history: {opponents: [opponents[0].id, opponents[1].id], winner: [id]}
             }
         });        
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ButtonToolbar, Button, Grid, Row, Col, Well } from 'react-bootstrap'
 
-const GameTable = ({opponents, onGameplayEvent}) =>
+const GameTable = ({opponents, onGameplayEvent}) => (
   <div>
 
     <Row className="show-grid">
@@ -31,6 +31,15 @@ const GameTable = ({opponents, onGameplayEvent}) =>
               <div className="pocket"></div>
             </div>
             <div className="player-wrapper">
+
+              {opponents.length == 0 &&
+                <div className="player-container">
+                  <div className={["player", "empty-table"].join(' ')}>
+                    Select Players
+                  </div> 
+                </div>                  
+              }
+
               {opponents.map((opponent, i) =>
                 <div key={i} className="player-container">
                   <div className="player">
@@ -38,6 +47,9 @@ const GameTable = ({opponents, onGameplayEvent}) =>
                   </div> 
                 </div>
               )}
+
+
+
             </div>
             <div className="pocket-container">
               <div className="pocket"></div>
@@ -49,7 +61,8 @@ const GameTable = ({opponents, onGameplayEvent}) =>
       </Col>
     </Row>
 
-  </div>;
+  </div>
+)
 
 GameTable.propTypes = {
   opponents: PropTypes.array.isRequired,			// Gameplay.opponents

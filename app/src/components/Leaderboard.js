@@ -8,7 +8,7 @@ const Leaderboard = ({players, selecting, select, selected, noselect}) => (
       <tr>
         <th className="edge-tbl-col">Rank</th>
         <th>Name</th>
-        <th>Win Pct.</th>
+        <th>Games Won</th>
         {selecting &&
           <th className="edge-tbl-col"></th>
         }
@@ -18,20 +18,27 @@ const Leaderboard = ({players, selecting, select, selected, noselect}) => (
 
       {players.map((player, i) =>
         <tr key={i}>
-          {/* new players shouldn't be ranked, since they haven't played yet */}
           <td className="edge-tbl-col">
-            { player.games.total > 0 ? players[(i != 0) ? i-1 : i].games.won / players[(i != 0) ? i-1 : i].games.total == player.games.won / player.games.total && i != 0 ? "T" : i + 1 : '-' }
+
+
+            {/* new players shouldn't be ranked, since they haven't played yet */}
+            {player.games.total > 0 ? players[(i != 0) ? i-1 : i].games.won == player.games.won && i != 0 ? `T - ${i}` : i + 1 : '-'}
+
+
+            {/* TODO:(BUG) the mutiple way tie, three or more players with the same amount of games won, issue. Displays 'T - i-1' instead of 'T - i-n' */}
+
+
           </td>
-          <td>{ player.name }</td>
+          <td>{player.name}</td>
           <td>
             {/* ...and new players shouldn't have a winning percentage */}
-            { player.games.total > 0 ? Math.round(player.games.won / player.games.total * 100) + '%' : 'n/a (New Player)' }
+            {player.games.total > 0 ? player.games.won : 'n/a (New Player)'}
           </td>
 
           {selecting &&
             <td className="edge-tbl-col">
               {/* if two players have been selected, the game is full or if a player has been selected, they can't be selected again */}
-              {noselect || selected == player.id ? (
+              {noselect || selected === player.id ? (
                 <Button
                   bsSize="xsmall"
                   bsStyle="default"
@@ -62,7 +69,7 @@ const Leaderboard = ({players, selecting, select, selected, noselect}) => (
 Leaderboard.propTypes = {
   players: PropTypes.array.isRequired,    // League.players
   selecting: PropTypes.bool.isRequired,   // Gameplay.active
-  select: PropTypes.func.isRequired,      // ...
+  select: PropTypes.func.isRequired,      // Function to handle the creation of a new player in the league
   selected: PropTypes.string,             // Gameplay.opponents[0].id
   noselect: PropTypes.bool.isRequired     // Gameplay.opponents.length >= 2
 

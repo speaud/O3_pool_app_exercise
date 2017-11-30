@@ -6,15 +6,13 @@ import {
   RECEIVE_GAMEPLAY_ACTIVE_STATUS,
 
   REQUEST_GAMEPLAY_OPPONENT,
-  RECEIVE_GAMEPLAY_OPPONENT
+  RECEIVE_GAMEPLAY_OPPONENT,
 } from '../constants/index.js'
 
-const initialState = {
+const GamePlay = (state = {
   opponents: [],
   active: false
-}
-
-const GamePlay = (state = initialState, action) => {
+}, action) => {
   switch (action.type) {
 
     case REQUEST_GAMEPLAY_ACTIVE_STATUS:
@@ -33,11 +31,11 @@ const GamePlay = (state = initialState, action) => {
       }
 
     case RECEIVE_GAMEPLAY_OPPONENT:
-    	return {
+      return {
         ...state,
         opponents: [...state.opponents, action.payload],
-        meta: FSA_META_RECEIVE    		
-    	}
+        meta: FSA_META_RECEIVE        
+      }
       
     default:
       return state
