@@ -3,12 +3,13 @@ $default-margin: 10px;
 $default-min-height: 200px;
 
 #poolTable {
-	border: 20px solid #A05A2C;
 	min-height: $default-min-height;
-	border-radius: 20px;
-	background: #2DA930;
 	color: #000;
 	position: relative;
+	background: #2DA930;
+	border: 20px solid #A05A2C;
+	border-radius: 20px;
+	box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 0px 0px 1px rgba(0, 0, 0, 0.7);
 
 	.pocket-container:nth-child(1) {
 		margin-top: -$default-margin;
@@ -29,9 +30,10 @@ $default-min-height: 200px;
 		.pocket {
 			height: $pocket-size;
 			width: $pocket-size;
-			background: #000;
+			background: #191919;
 			border-radius: 100%;
 			display: inline-block;
+			box-shadow: inset 0 0 1px #A05A2C;
 		}
 
 		.pocket:first-child {
@@ -55,7 +57,7 @@ $default-min-height: 200px;
 
 			.player {
 	  		position: relative;
-				background: #fff;
+				background: rgba(255, 255, 255, 0.8);
 				margin: 0 20px;
 				padding: 10px;
 			  top: 50%;
@@ -66,9 +68,16 @@ $default-min-height: 200px;
 
 			}
 
+			.active-player {
+			  cursor: pointer;
+			  transition: all 0.5s ease;
+				
+			  &:hover {
+			  	background: #fff;
+			  }
+			}
+
 			.empty-table {
-				background: rgba(0, 0, 0, 0.9);
-				color: #fff;
 			}
 		}
 	}

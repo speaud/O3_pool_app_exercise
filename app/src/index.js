@@ -9,6 +9,8 @@ import scss from './styles/index.scss'
 import App from './containers/App'
 import DevTools from './containers/DevTools'
 
+import { IS_PRODUCTION } from './constants'
+
 const store = storeConfig()
 
 // Define the render method in a function expression so it can be used by Webpack HMR
@@ -18,7 +20,9 @@ const renderApp = Component => {
     	<Provider store={store}>
     		<div>
 	      		<Component />
-	      		<DevTools />
+            {/*!IS_PRODUCTION &&
+              <DevTools />
+            */}
       		</div>
   		</Provider>
     </AppContainer>,
@@ -29,6 +33,6 @@ const renderApp = Component => {
 renderApp(App)
 
 // Enable Webpack HMR, for development only
-if (process.env.NODE_ENV !== 'production' && module.hot) {
+if (!IS_PRODUCTION && module.hot) {
   module.hot.accept('./containers/App', () => { renderApp(App) })
 }

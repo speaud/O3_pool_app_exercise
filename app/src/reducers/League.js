@@ -56,7 +56,6 @@ const initialState = {
 
 const League = (state = initialState, action) => {
   switch (action.type) {
-
     case REQUEST_PLAYER_SETUP:
       return {
         ...state,

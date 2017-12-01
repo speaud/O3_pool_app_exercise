@@ -1,6 +1,31 @@
 @import './game-table.scss';
 
-.edge-tbl-col {
-	max-width: 30px;
+.custom-success {
+	background: #00ff00;
+}
+
+.show-grid	{
+	padding: 10px;
+}
+
+#poolTableHeader {
 	text-align: center;
+	margin-bottom: 10px;
+	transition: all 0.5s ease;
+}
+
+td button {
+	width: 100px;
+}
+
+.selected-player {
+	background: rgba(0, 0, 0, 0.1);
+
+	&:hover {
+		background: rgba(0, 0, 0, 0.1) !important;
+	}
+}
+
+.well {
+	margin: auto 10px;
 }
